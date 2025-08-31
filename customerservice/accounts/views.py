@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from accounts.decorators import role_required  # assuming you moved it to accounts
+from accounts.decorators import role_required
 
 @role_required(allowed_roles=["superadmin"])
 def superadmin_dashboard(request):
