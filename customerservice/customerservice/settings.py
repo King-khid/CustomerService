@@ -11,6 +11,16 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-468_xm&lb8^oz&52j4)c8zup
 
 DEBUG = env.bool('DEBUG', default=True)
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # or your SMTP host
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kingkhid60@gmail.com'
+EMAIL_HOST_PASSWORD = 'ynmq luoe ijxm cxog'
+DEFAULT_FROM_EMAIL = 'kingkhid60@gmail.com'
+#from_email = "CustomerService <kingkhid60@gmail.com>"
+
+
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -20,11 +30,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'superadmin',
     'staff',
     'customer',
     'accounts',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
+
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 

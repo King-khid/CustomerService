@@ -3,7 +3,7 @@ from django.db import models
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, full_name, password=None, role="customer", **extra_fields):
+    def create_user(self, email, full_name=None, password=None, role="customer", **extra_fields):
         if not email:
             raise ValueError("Users must have an email address")
         email = self.normalize_email(email)
@@ -12,10 +12,10 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, full_name, password=None, **extra_fields):
+    def create_superuser(self, email, full_name=None, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        return self.create_user(email, full_name, password, role="superadmin", **extra_fields)
+        return self.create_user(email, full_name=full_name, role="superadmin", **extra_fields)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
